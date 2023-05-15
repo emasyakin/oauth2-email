@@ -1,0 +1,27 @@
+﻿@model SendEmailModel
+
+@{
+    ViewBag.Title = "OAuth2 flow complete";
+    Layout = "_Layout";
+}
+
+<h2>You can send email now</h2>
+
+@using (Html.BeginForm("SendEmail", "Home", FormMethod.Post))
+{
+    <strong>Signed In as: </strong> @Html.DisplayFor(m => m.SignedInAs)<br /><br />
+    <strong>To </strong> @Html.EditorFor(m => m.To)<br /><br />
+    <strong>Subject </strong> @Html.EditorFor(m => m.Subject) <br /><br />
+    <strong>Body </strong> @Html.EditorFor(m => m.Body)<br /><br />
+    <input id = "Submit" type = "submit" value = "submit" />
+}
+
+@if (Model.IsSent)
+{
+    <strong style="color:green"> email sent </strong>
+}
+
+@foreach (var email in Model.Emails)
+{
+    <strong>@email.Subject</strong><br />
+}
